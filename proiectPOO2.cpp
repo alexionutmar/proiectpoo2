@@ -2,6 +2,8 @@
 #include<iostream>
 #pragma warning (disable:4996)
 #include <string>
+#include <vector>
+
 using namespace std;
 
 enum tipProd{
@@ -1140,9 +1142,12 @@ public:
         }
 
         for(int i=0;i<f.zileLivrariLuna;i++){
-            for(int j=0;j<f.nrTipuriProdLivrate;j++)
-                out<<"In ziua "<<i+1<<" furnizorul a livrat "<<f.getProdLivrate()[i][j]<<" buc. din produsul de tip "<<j+1<<endl;
+            out<<"\nIn ziua "<<i+1<<" furnizorul a livrat:\t ";
+            for(int j=0;j<f.nrTipuriProdLivrate;j++) {
+                out << f.getProdLivrate()[i][j] << " buc. din produsul de tip " << f.listaOferta[j]->getDenumireProdus()<<", ";
+            }
         }
+        out<<endl;
         return out;
     }
 
@@ -1166,6 +1171,28 @@ public:
         int aux;
         in>>aux;
         f.setNrTipProdFurnizate(aux);
+        if(f.listaOferta!=NULL) delete[] f.listaOferta;
+        f.listaOferta = new Produs * [f.nrTipuriProdLivrate];
+        //in>>static_cast<Angajat&>(angs);
+
+        std::vector<std::shared_ptr<Produs>> produse;
+        for(int i=0;i<f.nrTipuriProdLivrate;i++){
+            std::shared_ptr<Produs> prod = std::make_shared<Produs>(i);
+            in >> *prod;
+            produse.push_back(prod);
+        }
+
+        std::for_each(produse.begin(), produse.end(), [&](const auto item) {
+            cout << "Produsele introduse: " << *item;
+        });
+
+        /*for(int i=0;i<f.nrTipuriProdLivrate;i++){
+            cout<<"\nProdusul de tip "<<i+1<<" : ";
+        }*/
+
+
+
+        /*
         char den[100];
         tipProd tip;
         float p;
@@ -1185,13 +1212,22 @@ public:
             (*f.listaOferta[i]).setDenumire(den);
             (*f.listaOferta[i]).setTipProdus(tip);
             (*f.listaOferta[i]).setPret(p);
-        }
-
+        }*/
+/*
         for(int i=0;i<f.zileLivrariLuna;i++){
             for(int j=0;j<f.nrTipuriProdLivrate;j++) {
                 cout << "\nIn ziua " << i + 1 << " pentru produsul de tip " << j + 1
                      << " au fost livrate un numar de bucati de: ";
                 in >> f.prodLivrate[i][j];
+            }
+        }
+        */
+
+        for(int i=0;i<f.zileLivrariLuna;i++){
+            cout<<"\nIn ziua "<<i+1<<" furnizorul a livrat un numar de bucati ";
+            for(int j=0;j<f.nrTipuriProdLivrate;j++){
+                cout<<" din produsul "<<f.listaOferta[j]->getDenumireProdus()<<" de: ";
+                in>>f.prodLivrate[i][j];
             }
         }
         return in;
