@@ -1,0 +1,3 @@
+/Users/alexionut/Documents/POO/proiectpoo2/cmake-build-debug/CMakeFiles/proiectpoo2.dir
+/Users/alexionut/Documents/POO/proiectpoo2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/alexionut/Documents/POO/proiectpoo2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
