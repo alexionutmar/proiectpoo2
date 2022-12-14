@@ -1520,10 +1520,12 @@ int main(){
     Furnizor f1;
     //apel constructor cu toti parametrii pentru furnizor
     Produs* oferta[]={&p1,&p2,&p3};
+
     int **livrari = new int*[28];
     for(int i=0;i<28;i++){
         livrari[i]= new int [5];
     }
+
     for(int i=0;i<28;i++){
         for(int j=0;j<5;j++)
             livrari[i][j]=0;
